@@ -18,3 +18,12 @@ test = pd.read_csv(test_path, names=CSV_COLUMN_NAMES, header=0)
 # we can retrieve the species column and use it as our label
 train_y = train.pop('Species')
 test_y = test.pop('Species')
+
+# Feature columns describe how to use the input.
+# We use the inbuilt function in tensorflow to get all the unique value represented in the data of certain features
+my_feature_columns = []
+for key in train.keys():
+    my_feature_columns.append(tf.feature_column.numeric_column(key=key))
+print(my_feature_columns)
+'''
+[NumericColumn(key='SepalLength', shape=(1,), default_value=None, dtype=tf.float32, normalizer_fn=None), NumericColumn(key='SepalWidth', shape=(1,), default_value=None, dtype=tf.float32, normalizer_fn=None), NumericColumn(key='PetalLength', shape=(1,), default_value=None, dtype=tf.float32, normalizer_fn=None), NumericColumn(key='PetalWidth', shape=(1,), default_value=None, dtype=tf.float32, normalizer_fn=None)]'''
